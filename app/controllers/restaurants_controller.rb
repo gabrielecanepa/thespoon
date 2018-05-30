@@ -4,6 +4,7 @@ class RestaurantsController < ApplicationController
   def chef
   end
 
+  # GET /restaurants/top
   def top
     @top_restaurants = Restaurant.where(stars: 5)
   end
@@ -13,7 +14,7 @@ class RestaurantsController < ApplicationController
     @restaurants = Restaurant.all
   end
 
-  # GET /restaurants/1
+  # GET /restaurants/:id
   def show
   end
 
@@ -22,45 +23,30 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new
   end
 
-  # GET /restaurants/1/edit
+  # GET /restaurants/:id/edit
   def edit
   end
 
   # POST /restaurants
   def create
     @restaurant = Restaurant.new(restaurant_params)
-
-    respond_to do |format|
-      if @restaurant.save
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
-        format.json { render :show, status: :created, location: @restaurant }
-      else
-        format.html { render :new }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
-      end
+    if @restaurant.save # for validation, it redirects just if the params are valid and the restaurant is saved in the db
+      redirect_to root_path
+    else
+      render :new # render the new template again, not with a new request
     end
   end
 
-  # PATCH/PUT /restaurants/1
+  # PATCH /restaurants/:id
   def update
-    respond_to do |format|
-      if @restaurant.update(restaurant_params)
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
-        format.json { render :show, status: :ok, location: @restaurant }
-      else
-        format.html { render :edit }
-        format.json { render json: @restaurant.errors, status: :unprocessable_entity }
-      end
-    end
+    @restaurant.update(restaurant_params)
+    redirect_to root_path
   end
 
-  # DELETE /restaurants/1
+  # DELETE /restaurants/:id
   def destroy
     @restaurant.destroy
-    respond_to do |format|
-      format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to root_path
   end
 
   private
@@ -69,7 +55,7 @@ class RestaurantsController < ApplicationController
       @restaurant = Restaurant.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through
+    # Never trust external parameters, only allow the white list through
     def restaurant_params
       params.require(:restaurant).permit(:name, :address, :description, :stars)
     end

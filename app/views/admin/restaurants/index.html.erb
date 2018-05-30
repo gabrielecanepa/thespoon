@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1 id="top">Restaurants:</h1>
+<h1 id="top">Your restaurants:</h1>
 
 <%= link_to 'New Restaurant', new_restaurant_path %>
 
@@ -24,7 +24,6 @@
     <div id="reviews" class="hidden" style="width: 50%; margin: 0 auto; border-top: 1px solid #EEE; padding: 16px 0;">
       <% if restaurant.reviews.empty? %>
         <p>This restaurant has no review yet.</p>
-        <strong><%= link_to 'Add the first review!', new_restaurant_review_path(restaurant) %></strong>
       <% else %>
         <% restaurant.reviews.each do |review| %>
           <strong><%= Faker::Name.name %>:</strong>
@@ -32,16 +31,13 @@
           <%= '✰' * (rand(5) + 1) %>
           <br>
         <% end %>
-        <strong style="display: block; padding: 10px 0;"><%= link_to 'Add a new review', new_restaurant_review_path(restaurant) %></strong>
       <% end %>
     </div>
     <hr style="border-top: 1px solid #BBB;">
   </div>
 <% end %>
 
-<%= link_to "Scroll to top ↑", '/#notice' %>
- |
-<%= link_to "Admin", admin_restaurants_path %>
+<%= link_to "← Back", root_path %>
 
 <script>
   const restaurants = document.querySelectorAll('.restaurant');

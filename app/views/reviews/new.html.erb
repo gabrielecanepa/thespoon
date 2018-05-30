@@ -1,0 +1,18 @@
+<h1 class="text-center">Post review for <%= @restaurant.name %></h1>
+
+<div class="container" style="padding-top: 40px;">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <%= simple_form_for [@restaurant, @review], defaults: { input_html: { autocomplete: 'off' } } do |f| %>
+        <%= f.input :content, placeholder: "Great place", autocomplete: 'off' %>
+        <%= f.submit "Post review", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!--
+  <form action="/restaurants/:id/reviews" method="post">
+    ...
+  </form>
+-->
