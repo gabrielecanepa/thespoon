@@ -6,7 +6,7 @@
 
 <hr style="border-top: 2px solid #D03538;">
 
-<% @restaurants.reverse.each do |restaurant| %>
+<% @restaurants.drop(rand(1..15)).reverse.each do |restaurant| %>
   <div class="restaurant">
     <%= link_to(restaurant) do %>
       <h3><%= restaurant.name %></h3>

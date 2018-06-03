@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params) # another way: `@review = @restaurant.reviews.build(review_params)`
     @review.restaurant = @restaurant # links the review to the restaurant
     @review.save
-    redirect_to root_path
+    redirect_to restaurant_path(@restaurant)
   end
 
   private

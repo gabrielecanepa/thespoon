@@ -40,7 +40,7 @@ class RestaurantsController < ApplicationController
   # PATCH /restaurants/:id
   def update
     @restaurant.update(restaurant_params)
-    redirect_to root_path
+    redirect_to restaurant_path(@restaurant)
   end
 
   # DELETE /restaurants/:id

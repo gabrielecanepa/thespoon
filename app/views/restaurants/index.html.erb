@@ -26,8 +26,8 @@
         <p>This restaurant has no review yet.</p>
         <strong><%= link_to 'Add the first review!', new_restaurant_review_path(restaurant) %></strong>
       <% else %>
-        <% restaurant.reviews.each do |review| %>
-          <strong><%= Faker::Name.name %>:</strong>
+        <% restaurant.reviews.reverse.each do |review| %>
+          <em><%= Faker::Name.name %>:</em>
           <%= review.content %>
           <%= '✰' * (rand(5) + 1) %>
           <br>

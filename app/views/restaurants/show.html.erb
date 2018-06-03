@@ -20,5 +20,21 @@
   <%= @restaurant.stars %>
 </p>
 
+<div style="width: 50%; margin: 0 auto; border-top: 1px solid #EEE; padding: 16px 0;">
+  <% if @restaurant.reviews.empty? %>
+    <p>This restaurant has no review yet.</p>
+    <strong><%= link_to 'Add the first review!', new_restaurant_review_path(@restaurant) %></strong>
+  <% else %>
+      <h4>Reviews:</h4>
+    <% @restaurant.reviews.reverse.each do |review| %>
+      <em><%= Faker::Name.name %>:</em>
+      <%= review.content %>
+      <%= '✰' * (rand(5) + 1) %>
+      <br>
+    <% end %>
+    <strong style="display: block; padding: 10px 0;"><%= link_to 'Add a new review', new_restaurant_review_path(@restaurant) %></strong>
+  <% end %>
+</div>
+
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
